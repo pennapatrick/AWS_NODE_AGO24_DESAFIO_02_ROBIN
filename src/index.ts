@@ -1,12 +1,27 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import sequelize from './db/conn';
+import userRoutes from './routes/userRoutes';
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Teste');
-});
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+const startServer = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('MySQL Conectado!');
+    
+    await sequelize.sync({ force: true });
+
+    app.use('/api/users', userRoutes);
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('MySQL Falhou:', error);
+  }
+};
+
+startServer();
