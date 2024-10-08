@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../db/conn';
+import sequelize from '../../db/conn';
 import { Car } from './Car';
 
 export interface ItemAttributes {

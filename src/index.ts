@@ -1,7 +1,7 @@
 import express from 'express';
 import sequelize from './db/conn';
 import userRoutes from './routes/userRoutes';
-import carRoutes from './routes/carRoutes'
+import carRoutes from './cars/routes/carRoutes'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
