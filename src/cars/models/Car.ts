@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../../db/conn';
-import { Item } from './Item';
+import { Item, ItemAttributes } from './Item';
 
 export interface CarAttributes {
   id?: string;
@@ -11,6 +11,7 @@ export interface CarAttributes {
   year: number;
   dailyPrice: number;
   status: 'ativo' | 'inativo' | 'excluido';
+  items?: ItemAttributes[];
   createdAt?: Date;
   deletedAt?: Date | null;
 }
@@ -25,6 +26,7 @@ export class Car extends Model<CarAttributes> implements CarAttributes {
   public dailyPrice!: number;
   public status!: 'ativo' | 'inativo' | 'excluido';
   public createdAt!: Date;
+  public items?: ItemAttributes[] | undefined;
 
   public static initialize() {
     Car.init(
