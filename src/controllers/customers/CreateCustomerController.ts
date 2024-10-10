@@ -27,7 +27,10 @@ export const createCustomer = async (req: Request, res: Response): Promise<void>
     };
 
     const checkCpf = await Customer.findOne({
-      where: { cpf }
+      where: {
+        cpf,
+        deletedAt: null
+      }
     });
     if (checkCpf) {
       res.status(400).json({ message: 'A customer with this CPF already exists' });
@@ -35,7 +38,10 @@ export const createCustomer = async (req: Request, res: Response): Promise<void>
     };
 
     const checkEmail = await Customer.findOne({
-      where: { email }
+      where: {
+        email,
+        deletedAt: null
+      }
     });
     if (checkEmail) {
       res.status(400).json({ message: 'A customer with this email already exists' });
