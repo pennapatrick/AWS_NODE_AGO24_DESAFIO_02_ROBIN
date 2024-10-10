@@ -1,29 +1,25 @@
-import { DataTypes, Model } from 'sequelize';
-import sequelize from '../../db/conn';
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../../db/conn";
 
-export interface CustomerAttributes {
+export interface UserAttributes {
   id?: string;
   name: string;
-  dateOfBirth: Date;
-  cpf: string;
   email: string;
-  phone: string;
+  password: string;
   createdAt?: Date;
   deletedAt?: Date | null;
 }
 
-export class Customer extends Model<CustomerAttributes> implements CustomerAttributes {
+export class User extends Model<UserAttributes> implements UserAttributes {
   public id!: string;
   public name!: string;
-  public dateOfBirth!: Date;
-  public cpf!: string;
   public email!: string;
-  public phone!: string;
+  public password!: string;
   public createdAt!: Date;
   public deletedAt!: Date | null;
 
   public static initialize() {
-    Customer.init(
+    User.init(
       {
         id: {
           type: DataTypes.UUID,
@@ -35,21 +31,12 @@ export class Customer extends Model<CustomerAttributes> implements CustomerAttri
           type: DataTypes.STRING,
           allowNull: false,
         },
-        dateOfBirth: {
-          type: DataTypes.DATEONLY,
-          allowNull: false,
-        },
-        cpf: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
-        },
         email: {
           type: DataTypes.STRING,
           allowNull: false,
           unique: true,
         },
-        phone: {
+        password: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -65,11 +52,11 @@ export class Customer extends Model<CustomerAttributes> implements CustomerAttri
       },
       {
         sequelize,
-        tableName: 'customers',
+        tableName: "users",
         timestamps: false,
       }
     );
   }
 }
 
-Customer.initialize();
+User.initialize();
