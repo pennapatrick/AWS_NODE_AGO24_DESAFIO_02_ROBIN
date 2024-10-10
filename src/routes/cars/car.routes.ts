@@ -9,7 +9,7 @@ const router = Router();
 
 router.post('/', createCar);
 router.put('/:id', updateCar);
-router.delete('/:carId', deleteCarById);
+router.delete('/:id', deleteCarById);
 router.get('/', getCars);
 router.get("/:id", getCarById)
 
