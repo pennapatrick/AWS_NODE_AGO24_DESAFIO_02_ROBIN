@@ -42,12 +42,10 @@ export class Customer extends Model<CustomerAttributes> implements CustomerAttri
                 cpf: {
                     type: DataTypes.STRING,
                     allowNull: false,
-                    unique: true,
                 },
                 email: {
                     type: DataTypes.STRING,
                     allowNull: false,
-                    unique: true,
                 },
                 phone: {
                     type: DataTypes.STRING,
