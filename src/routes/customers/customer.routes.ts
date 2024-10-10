@@ -1,7 +1,7 @@
 import express from 'express';
 import { createCustomer } from '../../controllers/customers/CreateCustomerController';
-import { getCustomerById } from '../../controllers/customers/GetCustomerController';
-import { getCustomers } from '../../controllers/customers/GetCustomersController';
+import { getCustomerById } from '../../controllers/customers/ListOneCustomerController';
+import { getCustomers } from '../../controllers/customers/ListCustomerController';
 import { updateCustomer } from '../../controllers/customers/UpdateCustomerController';
 import { deleteCustomer } from '../../controllers/customers/DeleteCustomerController';
 
