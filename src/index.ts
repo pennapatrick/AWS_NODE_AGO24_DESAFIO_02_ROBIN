@@ -1,8 +1,8 @@
 import express from 'express';
 import sequelize from './db/conn';
-import userRoutes from './routes/userRoutes';
-import CustomerRoutes from './customers/routes/CustomerRoutes'
-import carRoutes from './cars/routes/carRoutes'
+import userRoutes from './routes/users/user.routes';
+import CustomerRoutes from './routes/customers/customer.routes'
+import carRoutes from './routes/cars/car.routes'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,7 +13,7 @@ const startServer = async () => {
   try {
     await sequelize.authenticate();
     console.log('MySQL Conectado!');
-    
+
     await sequelize.sync({ force: true });
 
     app.use('/api/users', userRoutes);

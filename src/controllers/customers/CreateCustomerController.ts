@@ -1,27 +1,27 @@
 import { Request, Response } from 'express';
-import { Customer } from '../models/Customer';
+import { Customer } from '../../models/Customers/Customer';
 
 export const createCustomer = async (req: Request, res: Response): Promise<void> => {
   const { name, dateOfBirth, cpf, email, phone } = req.body;
 
   try {
-    if(!name) {
+    if (!name) {
       res.status(400).json({ message: 'name is required' });
       return
     };
-    if(!dateOfBirth) {
+    if (!dateOfBirth) {
       res.status(400).json({ message: 'date of birth is required' });
       return
     };
-    if(!cpf) {
+    if (!cpf) {
       res.status(400).json({ message: 'cpf is required' });
       return
     };
-    if(!email) {
+    if (!email) {
       res.status(400).json({ message: 'email is required' });
       return
     };
-    if(!phone) {
+    if (!phone) {
       res.status(400).json({ message: 'phone is required' });
       return
     };
