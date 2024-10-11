@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../../db/conn';
 import { Item, ItemAttributes } from './Item';
+import { Order } from '../Orders/Order';
 
 export interface CarAttributes {
     id?: string;
@@ -86,6 +87,10 @@ export class Car extends Model<CarAttributes> implements CarAttributes {
             foreignKey: 'carId',
             as: 'items',
             onDelete: 'CASCADE',
+        });
+        Car.hasMany(Order, {
+            foreignKey: 'carId',
+            as: 'orders',
         });
     }
 }

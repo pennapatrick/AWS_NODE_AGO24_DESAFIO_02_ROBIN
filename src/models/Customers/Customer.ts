@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../../db/conn';
+import { Order } from '../Orders/Order';
 
 export interface CustomerAttributes {
     id?: string;
@@ -67,6 +68,11 @@ export class Customer extends Model<CustomerAttributes> implements CustomerAttri
                 timestamps: false,
             }
         );
+
+        Customer.hasMany(Order, {
+            foreignKey: 'customerId',
+            as: 'orders',
+        });
     }
 }
 
