@@ -5,27 +5,6 @@ export const createCustomer = async (req: Request, res: Response): Promise<void>
   const { name, dateOfBirth, cpf, email, phone } = req.body;
 
   try {
-    if (!name) {
-      res.status(400).json({ message: 'name is required' });
-      return
-    };
-    if (!dateOfBirth) {
-      res.status(400).json({ message: 'date of birth is required' });
-      return
-    };
-    if (!cpf) {
-      res.status(400).json({ message: 'cpf is required' });
-      return
-    };
-    if (!email) {
-      res.status(400).json({ message: 'email is required' });
-      return
-    };
-    if (!phone) {
-      res.status(400).json({ message: 'phone is required' });
-      return
-    };
-
     const checkCpf = await Customer.findOne({
       where: {
         cpf,
