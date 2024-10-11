@@ -2,8 +2,9 @@ import express from 'express';
 import sequelize from './db/conn';
 import authRoutes from './routes/auth/auth.routes'
 import userRoutes from './routes/users/user.routes';
-import CustomerRoutes from './routes/customers/customer.routes'
+import customerRoutes from './routes/customers/customer.routes'
 import carRoutes from './routes/cars/car.routes';
+import orderRoutes from './routes/orders/order.routes'
 import { errors } from 'celebrate';
 
 const app = express();
@@ -20,8 +21,9 @@ const startServer = async () => {
 
     app.use('/api/users', userRoutes);
     app.use('/api/auth', authRoutes)
-    app.use('/api/customers', CustomerRoutes);
+    app.use('/api/customers', customerRoutes);
     app.use('/api/cars', carRoutes);
+    app.use('/api/orders', orderRoutes)
 
     app.use(errors());
 
