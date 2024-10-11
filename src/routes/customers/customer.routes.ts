@@ -1,4 +1,5 @@
 import express from 'express';
+import { authorize } from '../../middleware/auth.middleware';
 import { createCustomer } from '../../controllers/customers/CreateCustomerController';
 import { getCustomerById } from '../../controllers/customers/ListOneCustomerController';
 import { getCustomers } from '../../controllers/customers/ListCustomerController';
@@ -9,10 +10,10 @@ import { customerCreateValidationSchema, customerUpdateValidationSchema } from '
 
 const router = express.Router();
 
-router.post('/', celebrate(customerCreateValidationSchema), createCustomer);
-router.get('/:id', getCustomerById);
-router.get('/', getCustomers);
-router.patch('/:id', celebrate(customerUpdateValidationSchema), updateCustomer);
-router.delete('/:id', deleteCustomer);
+router.post('/', celebrate(customerCreateValidationSchema), authorize, createCustomer);
+router.get('/:id', authorize, getCustomerById);
+router.get('/', authorize, getCustomers);
+router.patch('/:id', celebrate(customerUpdateValidationSchema), authorize, updateCustomer);
+router.delete('/:id', authorize, deleteCustomer);
 
 export default router;

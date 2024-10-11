@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authorize } from "../../middleware/auth.middleware";
 import { createUser } from "../../controllers/users/CreateUserController";
 import { updateUser } from "../../controllers/users/UpdateUserController";
 import { deleteUser } from "../../controllers/users/DeleteUserController";
@@ -7,10 +8,10 @@ import { listOneUser } from "../../controllers/users/ListOneUserController";
 
 const router = Router();
 
-router.post('/', createUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
-router.get('/', listUsers);
-router.get('/:id', listOneUser);
+router.post('/', authorize, createUser);
+router.put('/:id', authorize, updateUser);
+router.delete('/:id', authorize, deleteUser);
+router.get('/', authorize, listUsers);
+router.get('/:id', authorize, listOneUser);
 
 export default router;

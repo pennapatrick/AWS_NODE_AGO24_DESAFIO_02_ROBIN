@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authorize } from '../../middleware/auth.middleware';
 import { createCar } from "../../controllers/cars/CreateCarController";
 import { updateCar } from "../../controllers/cars/UpdateCarController";
 import { deleteCarById } from "../../controllers/cars/DeleteCarController";
@@ -9,10 +10,10 @@ import { carUpdateValidationSchema, carCreateValidationSchema } from "../../vali
 
 const router = Router();
 
-router.post('/', celebrate(carCreateValidationSchema), createCar);
-router.patch('/:id', celebrate(carUpdateValidationSchema), updateCar);
-router.delete('/:id', deleteCarById);
-router.get('/', getCars);
-router.get('/:id', getCarById);
+router.post('/', celebrate(carCreateValidationSchema), authorize, createCar);
+router.patch('/:id', celebrate(carUpdateValidationSchema), authorize, updateCar);
+router.delete('/:id', authorize, deleteCarById);
+router.get('/', authorize, getCars);
+router.get('/:id', authorize, getCarById);
 
 export default router;
