@@ -2,7 +2,8 @@ import express from 'express';
 import sequelize from './db/conn';
 import userRoutes from './routes/users/user.routes';
 import CustomerRoutes from './routes/customers/customer.routes'
-import carRoutes from './routes/cars/car.routes'
+import carRoutes from './routes/cars/car.routes';
+import { errors } from 'celebrate';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +20,8 @@ const startServer = async () => {
     app.use('/api/users', userRoutes);
     app.use('/api/customers', CustomerRoutes);
     app.use('/api/cars', carRoutes);
+
+    app.use(errors());
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
