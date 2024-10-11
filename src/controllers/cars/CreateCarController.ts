@@ -36,8 +36,20 @@ export const createCar = async (req: Request, res: Response): Promise<void> => {
             await Item.bulkCreate(itemList);
         }
 
-        res.status(201).json(newCar);
+        const associatedItems = await Item.findAll({
+            where: { carId: newCar.id },
+            attributes: ['name'],
+        });
+
+        const itemNames = associatedItems.map(item => item.name);
+
+        const carWithItemNames = {
+            ...newCar.get(),
+            items: itemNames,
+        };
+
+        res.status(201).json(carWithItemNames);
     } catch (error) {
-        res.status(400).json({ message: "Error creating car", error });
+        res.status(500).json({ message: "Error creating car", error });
     }
 };
