@@ -11,8 +11,8 @@ export interface OrderAttributes {
     cep: string | null;
     city: string | null;
     uf: string | null;
-    rentalFee: number;
-    totalValue: number;
+    rentalFee?: number;
+    totalValue?: number;
     carId: string;
     startDateTime: Date | null;
     endDateTime: Date | null;
@@ -66,14 +66,17 @@ export class Order extends Model<OrderAttributes> implements OrderAttributes {
                 },
                 cep: {
                     type: DataTypes.STRING,
+                    defaultValue: null,
                     allowNull: true,
                 },
                 city: {
                     type: DataTypes.STRING,
+                    defaultValue: null,
                     allowNull: true,
                 },
                 uf: {
                     type: DataTypes.STRING,
+                    defaultValue: null,
                     allowNull: true,
                 },
                 rentalFee: {
@@ -96,10 +99,12 @@ export class Order extends Model<OrderAttributes> implements OrderAttributes {
                 },
                 startDateTime: {
                     type: DataTypes.DATE,
+                    defaultValue: null,
                     allowNull: true,
                 },
                 endDateTime: {
                     type: DataTypes.DATE,
+                    defaultValue: null,
                     allowNull: true,
                 },
                 cancellationDate: {
