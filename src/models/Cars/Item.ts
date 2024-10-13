@@ -42,13 +42,6 @@ export class Item extends Model<ItemAttributes> implements ItemAttributes {
             }
         );
     }
-
-    public static associate() {
-        Item.belongsTo(Car, {
-            foreignKey: 'carId',
-            as: 'car',
-        });
-    }
 }
 
 Item.initialize();

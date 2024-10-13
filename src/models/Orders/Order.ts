@@ -127,17 +127,6 @@ export class Order extends Model<OrderAttributes> implements OrderAttributes {
             }
         );
     }
-
-    public static associate() {
-        Order.belongsTo(Customer, {
-            foreignKey: 'customerId',
-            as: 'customer',
-        });
-        Order.belongsTo(Car, {
-            foreignKey: 'carId',
-            as: 'car',
-        });
-    }
 }
 
 Order.initialize();
