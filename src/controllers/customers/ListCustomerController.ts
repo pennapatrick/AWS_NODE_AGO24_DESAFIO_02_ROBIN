@@ -30,7 +30,7 @@ export const getCustomers = async (
     name?: { [Op.like]: string };
     email?: { [Op.like]: string };
     cpf?: string;
-    deletedAt?: { [Op.is]: null | { [Op.not]: null } };
+    deletedAt?: { [Op.not]: null } | { [Op.is]: null };
   } = {};
 
   const order: Array<[string, 'ASC' | 'DESC']> = [];
