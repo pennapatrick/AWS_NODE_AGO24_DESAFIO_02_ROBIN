@@ -20,6 +20,6 @@ export const deleteCarById = async (
         await car.save()
         res.status(204).send();
     } catch (error) {
-        res.status(500).json({ message: "Error fetching car", error });
+        res.status(500).json({ message: "Error at deleting car", error });
     }
 };

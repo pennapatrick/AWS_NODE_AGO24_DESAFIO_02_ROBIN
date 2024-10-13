@@ -14,11 +14,17 @@ export const deleteCustomer = async (req: Request, res: Response): Promise<void>
       return
     }
 
+    if (customer.deletedAt) {
+      res.status(400).json({ message: 'This customer has already been deleted' });
+      return;
+    }
+
     customer.deletedAt = new Date()
     await customer.save()
+
     res.status(204).send()
 
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching customer', error });
+    res.status(500).json({ message: 'Error at deleting customer', error });
   }
 };
