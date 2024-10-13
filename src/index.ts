@@ -6,6 +6,7 @@ import customerRoutes from './routes/customers/customer.routes'
 import carRoutes from './routes/cars/car.routes';
 import orderRoutes from './routes/orders/order.routes'
 import { errors } from 'celebrate';
+import { setupAssociations } from './db/associations';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ const startServer = async () => {
     console.log('MySQL Conectado!');
 
     await sequelize.sync();
+    setupAssociations();
 
     app.use('/api/users', userRoutes);
     app.use('/api/auth', authRoutes)
