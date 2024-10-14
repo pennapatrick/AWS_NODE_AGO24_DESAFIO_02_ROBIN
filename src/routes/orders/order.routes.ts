@@ -5,7 +5,7 @@ import { getOrderById } from '../../controllers/orders/ListOneOrderController';
 import { deleteOrder } from '../../controllers/orders/DeleteOrderController';
 import { updateOrder } from '../../controllers/orders/UpdateOrderController';
 import { celebrate } from 'celebrate';
-import { orderCreateValidationSchema } from '../../validations/orders/OrdersValidations';
+import { orderCreateValidationSchema, orderUpdateValidationSchema } from '../../validations/orders/OrderValidations';
 import { getOrders } from '../../controllers/orders/ListOrderController';
 
 const router = express.Router();
@@ -199,7 +199,7 @@ router.delete('/:id', authorize, deleteOrder);
  *     deprecated: true
  *
  */
-router.patch('/:id', authorize, updateOrder);
+router.patch('/:id', celebrate(orderUpdateValidationSchema), authorize, updateOrder);
 
 /**
  * @swagger
