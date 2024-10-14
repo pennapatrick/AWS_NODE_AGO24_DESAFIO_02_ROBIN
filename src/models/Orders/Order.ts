@@ -19,6 +19,8 @@ export interface OrderAttributes {
     cancellationDate: Date | null;
     closingDate: Date | null;
     fine: number | null;
+    customer?: Customer;
+    car?: Car;
 }
 
 export class Order extends Model<OrderAttributes> implements OrderAttributes {
@@ -37,6 +39,8 @@ export class Order extends Model<OrderAttributes> implements OrderAttributes {
     public cancellationDate!: Date | null;
     public closingDate!: Date | null;
     public fine!: number | null;
+    public customer?: Customer;
+    public car?: Car;
 
     public static initialize() {
         Order.init(
