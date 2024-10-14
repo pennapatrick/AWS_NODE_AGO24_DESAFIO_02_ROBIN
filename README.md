@@ -25,95 +25,95 @@ Oferece funcionalidades completas de um CRUD (Create, Read, Update, Delete) para
 ### Autenticação
 Login
 ```http
-  POST /api/auth/
+  POST /api/v1/auth/
 ```
 
 ### Usuários
 Criação de Usuários
 ```http
-  POST /api/users/
+  POST /api/v1/users/
 ```
 Visualizar um Usuário pelo Id
 ```http
-  GET /api/users/:id
+  GET /api/v1/users/:id
 ```
 Leitura de Usuários
 ```http
-  GET /api/users/
+  GET /api/v1/users/
 ```
 Atualização de Usuários
 ```http
-  PUT /api/users/:id
+  PUT /api/v1/users/:id
 ```
 Exclusão de Usuários
 ```http
-  DELETE /api/users/:id
+  DELETE /api/v1/users/:id
 ```
 
 ### Clientes
 Criação de Clientes
 ```http
-  POST /api/customers/
+  POST /api/v1/customers/
 ```
 Visualizar um Cliente pelo Id
 ```http
-  GET /api/customers/:id
+  GET /api/v1/customers/:id
 ```
 Leitura de Clientes
 ```http
-  GET /api/customers/
+  GET /api/v1/customers/
 ```
 Atualização de Clientes
 ```http
-  PATCH /api/customers/:id
+  PATCH /api/v1/customers/:id
 ```
 Exclusão de Clientes
 ```http
-  DELETE /api/customers/:id
+  DELETE /api/v1/customers/:id
 ```
 
 ### Carros
 Criação de Carros
 ```http
-  POST /api/cars/
+  POST /api/v1/cars/
 ```
 Visualizar um Carro pelo Id
 ```http
-  GET /api/cars/:id
+  GET /api/v1/cars/:id
 ```
 Leitura de Carros
 ```http
-  GET /api/cars/
+  GET /api/v1/cars/
 ```
 Atualização de Carros
 ```http
-  PATCH /api/cars/:id
+  PATCH /api/v1/cars/:id
 ```
 Exclusão de Carros
 ```http
-  DELETE /api/cars/:id
+  DELETE /api/v1/cars/:id
 ```
 
 ### Pedidos de Locação
 Criação de Pedidos
 ```http
-  POST /api/orders/
+  POST /api/v1/orders/
 ```
 Visualizar um Pedido pelo Id
 ```http
-  GET /api/orders/:id
+  GET /api/v1/orders/:id
 ```
 Leitura de Pedidos
 ```http
-  GET /api/orders/
+  GET /api/v1/orders/
 ```
 Atualização de Pedidos
 ```http
-  PATCH /api/orders/:id
+  PATCH /api/v1/orders/:id
 ```
 Exclusão de Pedidos
 ```http
-  DELETE /api/orders/:id
+  DELETE /api/v1/orders/:id
 ```
 
 ## Rodando Localmente
