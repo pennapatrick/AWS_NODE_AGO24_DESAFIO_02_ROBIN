@@ -1,15 +1,15 @@
-import express from "express";
-import { authorize } from "../../middleware/auth.middleware";
-import { createCustomer } from "../../controllers/customers/CreateCustomerController";
-import { getCustomerById } from "../../controllers/customers/ListOneCustomerController";
-import { getCustomers } from "../../controllers/customers/ListCustomerController";
-import { updateCustomer } from "../../controllers/customers/UpdateCustomerController";
-import { deleteCustomer } from "../../controllers/customers/DeleteCustomerController";
-import { celebrate } from "celebrate";
+import express from 'express';
+import { authorize } from '../../middleware/auth.middleware';
+import { createCustomer } from '../../controllers/customers/CreateCustomerController';
+import { getCustomerById } from '../../controllers/customers/ListOneCustomerController';
+import { getCustomers } from '../../controllers/customers/ListCustomerController';
+import { updateCustomer } from '../../controllers/customers/UpdateCustomerController';
+import { deleteCustomer } from '../../controllers/customers/DeleteCustomerController';
+import { celebrate } from 'celebrate';
 import {
   customerCreateValidationSchema,
   customerUpdateValidationSchema,
-} from "../../validations/customers/CustomerValidations";
+} from '../../validations/customers/CustomerValidations';
 
 const router = express.Router();
 
@@ -138,7 +138,7 @@ const router = express.Router();
  *         description: Internal Server Error
  */
 router.post(
-  "/",
+  '/',
   celebrate(customerCreateValidationSchema),
   authorize,
   createCustomer
@@ -192,7 +192,7 @@ router.post(
  *       404:
  *         description: customer not found
  */
-router.get("/:id", authorize, getCustomerById);
+router.get('/:id', authorize, getCustomerById);
 
 /**
  * @swagger
@@ -236,7 +236,7 @@ router.get("/:id", authorize, getCustomerById);
  *       500:
  *         description: Internal Server Error
  */
-router.get("/", authorize, getCustomers);
+router.get('/', authorize, getCustomers);
 
 /**
  * @swagger
@@ -307,7 +307,7 @@ router.get("/", authorize, getCustomers);
  *       - bearerAuth: []
  */
 router.patch(
-  "/:id",
+  '/:id',
   celebrate(customerUpdateValidationSchema),
   authorize,
   updateCustomer
@@ -347,6 +347,6 @@ router.patch(
  *     security:
  *       - bearerAuth: []
  */
-router.delete("/:id", authorize, deleteCustomer);
+router.delete('/:id', authorize, deleteCustomer);
 
 export default router;

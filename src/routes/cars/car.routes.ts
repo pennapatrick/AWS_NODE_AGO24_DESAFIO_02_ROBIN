@@ -1,15 +1,15 @@
-import { Router } from "express";
-import { authorize } from "../../middleware/auth.middleware";
-import { createCar } from "../../controllers/cars/CreateCarController";
-import { updateCar } from "../../controllers/cars/UpdateCarController";
-import { deleteCarById } from "../../controllers/cars/DeleteCarController";
-import { getCars } from "../../controllers/cars/ListCarController";
-import { getCarById } from "../../controllers/cars/ListOneCarController";
-import { celebrate } from "celebrate";
+import { Router } from 'express';
+import { authorize } from '../../middleware/auth.middleware';
+import { createCar } from '../../controllers/cars/CreateCarController';
+import { updateCar } from '../../controllers/cars/UpdateCarController';
+import { deleteCarById } from '../../controllers/cars/DeleteCarController';
+import { getCars } from '../../controllers/cars/ListCarController';
+import { getCarById } from '../../controllers/cars/ListOneCarController';
+import { celebrate } from 'celebrate';
 import {
   carUpdateValidationSchema,
   carCreateValidationSchema,
-} from "../../validations/cars/CarValidations";
+} from '../../validations/cars/CarValidations';
 
 const router = Router();
 
@@ -138,7 +138,7 @@ const router = Router();
  *        - apiKeyAuth: []
  *        - basicAuth: []
  */
-router.post("/", celebrate(carCreateValidationSchema), authorize, createCar);
+router.post('/', celebrate(carCreateValidationSchema), authorize, createCar);
 
 /**
  * @swagger
@@ -240,7 +240,7 @@ router.post("/", celebrate(carCreateValidationSchema), authorize, createCar);
  *        - basicAuth: []
  */
 router.patch(
-  "/:id",
+  '/:id',
   celebrate(carUpdateValidationSchema),
   authorize,
   updateCar
@@ -276,7 +276,7 @@ router.patch(
  *        - apiKeyAuth: []
  *        - basicAuth: []
  */
-router.delete("/:id", authorize, deleteCarById);
+router.delete('/:id', authorize, deleteCarById);
 
 /**
  * @swagger
@@ -329,7 +329,7 @@ router.delete("/:id", authorize, deleteCarById);
  *        - apiKeyAuth: []
  *        - basicAuth: []
  */
-router.get("/", authorize, getCars);
+router.get('/', authorize, getCars);
 
 /**
  * @swagger
@@ -387,6 +387,6 @@ router.get("/", authorize, getCars);
  *        - apiKeyAuth: []
  *        - basicAuth: []
  */
-router.get("/:id", authorize, getCarById);
+router.get('/:id', authorize, getCarById);
 
 export default router;

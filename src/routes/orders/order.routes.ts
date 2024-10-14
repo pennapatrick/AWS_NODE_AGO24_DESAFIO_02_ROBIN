@@ -1,12 +1,12 @@
-import express from "express";
-import { authorize } from "../../middleware/auth.middleware";
-import { createOrder } from "../../controllers/orders/CreateOrderController";
-import { getOrderById } from "../../controllers/orders/ListOneOrderController";
-import { deleteOrder } from "../../controllers/orders/DeleteOrderController";
-import { updateOrder } from "../../controllers/orders/UpdateOrderController";
-import { celebrate } from "celebrate";
-import { orderCreateValidationSchema } from "../../validations/orders/OrdersValidations";
-import { getOrders } from "../../controllers/orders/ListOrderController";
+import express from 'express';
+import { authorize } from '../../middleware/auth.middleware';
+import { createOrder } from '../../controllers/orders/CreateOrderController';
+import { getOrderById } from '../../controllers/orders/ListOneOrderController';
+import { deleteOrder } from '../../controllers/orders/DeleteOrderController';
+import { updateOrder } from '../../controllers/orders/UpdateOrderController';
+import { celebrate } from 'celebrate';
+import { orderCreateValidationSchema } from '../../validations/orders/OrdersValidations';
+import { getOrders } from '../../controllers/orders/ListOrderController';
 
 const router = express.Router();
 
@@ -95,7 +95,7 @@ const router = express.Router();
  *         description: Bad request
  */
 router.post(
-  "/",
+  '/',
   celebrate(orderCreateValidationSchema),
   authorize,
   createOrder
@@ -131,7 +131,7 @@ router.post(
  *       - bearerAuth: []
  */
 
-router.get("/:id", authorize, getOrderById);
+router.get('/:id', authorize, getOrderById);
 
 /**
  * @swagger
@@ -160,7 +160,7 @@ router.get("/:id", authorize, getOrderById);
  *     deprecated: true
 
  */
-router.delete("/:id", authorize, deleteOrder);
+router.delete('/:id', authorize, deleteOrder);
 
 /**
  * @swagger
@@ -199,7 +199,7 @@ router.delete("/:id", authorize, deleteOrder);
  *     deprecated: true
  *
  */
-router.patch("/:id", authorize, updateOrder);
+router.patch('/:id', authorize, updateOrder);
 
 /**
  * @swagger
@@ -221,6 +221,6 @@ router.patch("/:id", authorize, updateOrder);
  *     security:
  *       - bearerAuth: []
  */
-router.get("/", authorize, getOrders);
+router.get('/', authorize, getOrders);
 
 export default router;

@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../../db/conn";
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../../db/conn';
 
 export interface UserAttributes {
   id?: string;
@@ -52,7 +52,7 @@ export class User extends Model<UserAttributes> implements UserAttributes {
       },
       {
         sequelize,
-        tableName: "users",
+        tableName: 'users',
         timestamps: false,
       }
     );

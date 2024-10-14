@@ -4,29 +4,29 @@ import { Item } from '../models/Cars/Item';
 import { Customer } from '../models/Customers/Customer';
 
 export function setupAssociations() {
-    Item.belongsTo(Car, {
-        foreignKey: 'carId',
-        as: 'car',
-    });
+  Item.belongsTo(Car, {
+    foreignKey: 'carId',
+    as: 'car',
+  });
 
-    Car.hasMany(Item, {
-        foreignKey: 'carId',
-        as: 'items',
-        onDelete: 'CASCADE',
-    });
+  Car.hasMany(Item, {
+    foreignKey: 'carId',
+    as: 'items',
+    onDelete: 'CASCADE',
+  });
 
-    Order.belongsTo(Car, {
-        foreignKey: 'carId',
-        as: 'car',
-    });
+  Order.belongsTo(Car, {
+    foreignKey: 'carId',
+    as: 'car',
+  });
 
-    Car.hasMany(Order, {
-        foreignKey: 'carId',
-        as: 'orders',
-    });
+  Car.hasMany(Order, {
+    foreignKey: 'carId',
+    as: 'orders',
+  });
 
-    Order.belongsTo(Customer, {
-        foreignKey: 'customerId',
-        as: 'customer',
-    });
+  Order.belongsTo(Customer, {
+    foreignKey: 'customerId',
+    as: 'customer',
+  });
 }

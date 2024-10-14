@@ -48,9 +48,9 @@ export const getCustomers = async (
   }
 
   if (excluded) {
-    where.deletedAt = excluded === 'yes' ? { [Op.not]: null } : { [Op.is]: null };
+    where.deletedAt =
+      excluded === 'yes' ? { [Op.not]: null } : { [Op.is]: null };
   }
-
 
   if (sort) {
     order.push([sort, 'ASC']);

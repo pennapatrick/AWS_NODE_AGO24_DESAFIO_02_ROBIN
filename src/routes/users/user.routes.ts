@@ -1,15 +1,15 @@
-import { Router } from "express";
-import { authorize } from "../../middleware/auth.middleware";
-import { createUser } from "../../controllers/users/CreateUserController";
-import { updateUser } from "../../controllers/users/UpdateUserController";
-import { deleteUser } from "../../controllers/users/DeleteUserController";
-import { listUsers } from "../../controllers/users/ListUserController";
-import { listOneUser } from "../../controllers/users/ListOneUserController";
-import { celebrate } from "celebrate";
+import { Router } from 'express';
+import { authorize } from '../../middleware/auth.middleware';
+import { createUser } from '../../controllers/users/CreateUserController';
+import { updateUser } from '../../controllers/users/UpdateUserController';
+import { deleteUser } from '../../controllers/users/DeleteUserController';
+import { listUsers } from '../../controllers/users/ListUserController';
+import { listOneUser } from '../../controllers/users/ListOneUserController';
+import { celebrate } from 'celebrate';
 import {
   userCreateValidationSchema,
   userUpdateValidationSchema,
-} from "../../validations/users/UserValidations";
+} from '../../validations/users/UserValidations';
 
 const router = Router();
 
@@ -96,7 +96,7 @@ const router = Router();
  *       500:
  *         description: error creating the user
  */
-router.post("/", celebrate(userCreateValidationSchema), authorize, createUser);
+router.post('/', celebrate(userCreateValidationSchema), authorize, createUser);
 
 /**
  * @swagger
@@ -166,7 +166,7 @@ router.post("/", celebrate(userCreateValidationSchema), authorize, createUser);
  *       - bearerAuth: []
  */
 router.put(
-  "/:id",
+  '/:id',
   celebrate(userUpdateValidationSchema),
   authorize,
   updateUser
@@ -197,7 +197,7 @@ router.put(
  *     security:
  *       - bearerAuth: []
  */
-router.delete("/:id", authorize, deleteUser);
+router.delete('/:id', authorize, deleteUser);
 
 /**
  * @swagger
@@ -238,7 +238,7 @@ router.delete("/:id", authorize, deleteUser);
  *     security:
  *       - bearerAuth: []
  */
-router.get("/", authorize, listUsers);
+router.get('/', authorize, listUsers);
 
 /**
  * @swagger
@@ -287,6 +287,6 @@ router.get("/", authorize, listUsers);
  *     security:
  *       - bearerAuth: []
  */
-router.get("/:id", authorize, listOneUser);
+router.get('/:id', authorize, listOneUser);
 
 export default router;

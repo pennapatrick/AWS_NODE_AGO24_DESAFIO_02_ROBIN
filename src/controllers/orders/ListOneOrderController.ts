@@ -4,7 +4,10 @@ import { Customer } from '../../models/Customers/Customer';
 import { Car } from '../../models/Cars/Car';
 import { Item } from '../../models/Cars/Item';
 
-export const getOrderById = async (req: Request, res: Response): Promise<void> => {
+export const getOrderById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const id = req.params.id;
 
   try {
@@ -14,12 +17,7 @@ export const getOrderById = async (req: Request, res: Response): Promise<void> =
         {
           model: Customer,
           as: 'customer',
-          attributes: [
-            'id',
-            'name',
-            'email',
-            'cpf'
-          ],
+          attributes: ['id', 'name', 'email', 'cpf'],
         },
         {
           model: Car,
@@ -31,15 +29,13 @@ export const getOrderById = async (req: Request, res: Response): Promise<void> =
             'year',
             'km',
             'plate',
-            'dailyPrice'
+            'dailyPrice',
           ],
           include: [
             {
               model: Item,
               as: 'items',
-              attributes: [
-                'name'
-              ],
+              attributes: ['name'],
             },
           ],
         },
@@ -48,7 +44,7 @@ export const getOrderById = async (req: Request, res: Response): Promise<void> =
 
     if (!order) {
       res.status(404).json({ message: 'Order not found' });
-      return
+      return;
     }
 
     res.status(200).json(order);

@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { login } from "../../controllers/users/LoginUserController";
+import { Router } from 'express';
+import { login } from '../../controllers/users/LoginUserController';
 
 const router = Router();
 
@@ -39,6 +39,6 @@ const router = Router();
  *         description: Internal server error
  */
 
-router.post("/", login);
+router.post('/', login);
 
 export default router;

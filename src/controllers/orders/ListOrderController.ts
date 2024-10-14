@@ -75,7 +75,7 @@ export const getOrders = async (
       return;
     }
 
-    const formattedOrders = rows.map(order => {
+    const formattedOrders = rows.map((order) => {
       const orderData = order.get({ plain: true });
       return {
         ...orderData,

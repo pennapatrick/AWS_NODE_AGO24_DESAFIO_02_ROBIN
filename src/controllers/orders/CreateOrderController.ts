@@ -1,60 +1,65 @@
 import { Request, Response } from 'express';
-import { Order } from '../../models/Orders/Order'
+import { Order } from '../../models/Orders/Order';
 import { Customer } from '../../models/Customers/Customer';
 import { Car } from '../../models/Cars/Car';
 
-export const createOrder = async (req: Request, res: Response): Promise<void> => {
+export const createOrder = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { customerId, carId } = req.body;
 
   try {
     const customer = await Customer.findOne({
-        where: { 
-            id: customerId,
-            deletedAt: null
-        }
+      where: {
+        id: customerId,
+        deletedAt: null,
+      },
     });
     if (!customer) {
       res.status(400).json({ message: 'Customer not found' });
-      return
-    };
+      return;
+    }
 
     const car = await Car.findOne({
-        where: {
-            id: carId,
-            status: 'ativo'
-        }
+      where: {
+        id: carId,
+        status: 'ativo',
+      },
     });
     if (!car) {
       res.status(400).json({ message: 'Car not found' });
-      return
-    };
+      return;
+    }
 
     const existingCarOrder = await Order.findOne({
-        where: {
-          carId,
-          status: 'Aberto'
-        }
+      where: {
+        carId,
+        status: 'Aberto',
+      },
     });
     if (existingCarOrder) {
-        res.status(400).json({ message: 'This car is already on order' });
-        return;
+      res.status(400).json({ message: 'This car is already on order' });
+      return;
     }
 
     const existingCustomerOrder = await Order.findOne({
-        where: { 
-            customerId, 
-            status: 'Aberto'
-        }
+      where: {
+        customerId,
+        status: 'Aberto',
+      },
     });
     if (existingCustomerOrder) {
-        res.status(400).json({ message: 'This customer already has an open order' });
-        return
+      res
+        .status(400)
+        .json({ message: 'This customer already has an open order' });
+      return;
     }
 
     const newOrder = await Order.create({
-        customerId,
-        carId,
-        status: 'Aberto'
+      customerId,
+      carId,
+      status: 'Aberto',
     });
 
     res.status(201).json(newOrder);
