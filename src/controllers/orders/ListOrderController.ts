@@ -1,129 +1,95 @@
-import { Request, Response } from "express";
-import { Order } from "../../models/Orders/Order";
-import { Op } from "sequelize";
+import { Request, Response } from 'express';
+import { Op } from 'sequelize';
+import { Order } from '../../models/Orders/Order';
+import { Customer } from '../../models/Customers/Customer';
 
-interface GetOrderQuery {
-  id?: string;
+interface GetOrdersQuery {
+  cpf?: string;
   status?: string;
-  createdAt?: Date;
-  startDateTime?: Date;
-  endDateTime?: Date;
-  rentalFee?: number;
-  totalValue?: number;
-  cep?: string;
-  city?: string;
-  uf?: string;
-  customerId?: string;
-  carId?: string;
+  startDate?: string;
+  endDate?: string;
   page?: string;
   size?: string;
-  sort?: string;
+  sort?: 'startDateTime' | 'endDateTime' | 'status';
 }
 
-export const getOrder = async (
-  req: Request<unknown, unknown, unknown, GetOrderQuery>,
+export const getOrders = async (
+  req: Request<unknown, unknown, unknown, GetOrdersQuery>,
   res: Response
 ): Promise<void> => {
   const {
-    id,
+    cpf,
     status,
-    createdAt,
-    startDateTime,
-    endDateTime,
-    rentalFee,
-    totalValue,
-    cep,
-    city,
-    uf,
-    customerId,
-    page = "1",
-    size = "10",
-    sort = "quantityOrders",
+    startDate,
+    endDate,
+    page = '1',
+    size = '10',
+    sort = 'startDateTime',
   } = req.query;
 
   const where: {
-    id?: string;
     status?: string;
-    createdAt?: Date;
-    startDateTime?: Date;
-    endDateTime?: Date;
-    rentalFee?: number;
-    totalValue?: number;
-    cep?: string;
-    city?: string;
-    uf?: string;
-    customerId?: string;
+    startDateTime?: { [Op.gte]?: Date };
+    endDateTime?: { [Op.lte]?: Date };
   } = {};
-
-  const order: Array<[string, "ASC" | "DESC"]> = [];
-
-  if (id) {
-    where.id = id;
-  }
 
   if (status) {
     where.status = status;
   }
 
-  if (createdAt) {
-    where.createdAt = createdAt;
+  if (startDate || endDate) {
+    if (startDate && endDate) {
+      where.startDateTime = { [Op.gte]: new Date(startDate) };
+      where.endDateTime = { [Op.lte]: new Date(endDate) };
+    } else if (startDate) {
+      where.startDateTime = { [Op.gte]: new Date(startDate) };
+    } else if (endDate) {
+      where.endDateTime = { [Op.lte]: new Date(endDate) };
+    }
   }
 
-  if (startDateTime) {
-    where.startDateTime = startDateTime;
-  }
-
-  if (endDateTime) {
-    where.endDateTime = endDateTime;
-  }
-
-  if (rentalFee) {
-    where.rentalFee = rentalFee;
-  }
-
-  if (totalValue) {
-    where.totalValue = totalValue;
-  }
-
-  if (cep) {
-    where.cep = cep;
-  }
-
-  if (city) {
-    where.city = city;
-  }
-
-  if (uf) {
-    where.uf = uf;
-  }
-
-  if (customerId) {
-    where.customerId = customerId;
-  }
+  const order: Array<[string, 'ASC' | 'DESC']> = [];
 
   if (sort) {
-    order.push([sort, "ASC"]);
+    order.push([sort, 'ASC']);
   }
 
   try {
     const { count, rows } = await Order.findAndCountAll({
       where,
+      include: [
+        {
+          model: Customer,
+          as: 'customer',
+          where: cpf ? { cpf } : undefined,
+          attributes: ['id', 'name', 'cpf'],
+        },
+      ],
       order,
       limit: parseInt(size, 10),
       offset: (parseInt(page, 10) - 1) * parseInt(size, 10),
     });
 
     if (rows.length === 0) {
-      res.status(404).json({ message: "No orders found" });
+      res.status(404).json({ message: 'No orders found' });
+      return;
     }
+
+    const formattedOrders = rows.map(order => {
+      const orderData = order.get({ plain: true });
+      return {
+        ...orderData,
+        customer: orderData.customer || null,
+      };
+    });
 
     res.status(200).json({
       totalOrders: count,
       totalPages: Math.ceil(count / parseInt(size, 10)),
       currentPage: parseInt(page, 10),
-      orders: rows,
+      orders: formattedOrders,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching orders", error });
+    res.status(500).json({ message: 'Error fetching orders', error });
   }
 };
