@@ -242,7 +242,7 @@ router.get("/", authorize, listUsers);
 
 /**
  * @swagger
- * /users/getuser/{id}:
+ * /users/{id}:
  *   get:
  *     summary: Retrieve a user's information
  *     description: Search for a user by ID, as long as the "deletedAt" field is null (active user).

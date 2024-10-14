@@ -15,7 +15,40 @@ const router = Router();
 
 /**
  * @swagger
- *  /cars:
+ * components:
+ *   schemas:
+ *     Car:
+ *       type: object
+ *       properties:
+ *         plate:
+ *           type: string
+ *           pattern: ^[A-Z]{3}[0-9][A-Z][0-9]{2}$
+ *         brand:
+ *           type: string
+ *         model:
+ *           type: string
+ *         km:
+ *           type: number
+ *           minimum: 0
+ *         year:
+ *           type: number
+ *           minimum: 2013
+ *           maximum: 2024
+ *         dailyPrice:
+ *           type: number
+ *           minimum: 0
+ *         status:
+ *           type: string
+ *           enum: [ativo, inativo, excluido]
+ *         items:
+ *           type: array
+ *           items:
+ *             type: string
+ */
+
+/**
+ * @swagger
+ *  api/v1/cars:
  *    post:
  *      summary: Create a new car
  *      tags: [cars]
@@ -109,7 +142,7 @@ router.post("/", celebrate(carCreateValidationSchema), authorize, createCar);
 
 /**
  * @swagger
- *  /cars/{id}:
+ *  api/v1/cars/{id}:
  *    patch:
  *      summary: Update a car
  *      tags: [cars]
@@ -215,7 +248,7 @@ router.patch(
 
 /**
  * @swagger
- *  /cars/{id}:
+ *  api/v1/cars/{id}:
  *    delete:
  *      summary: Delete a car
  *      tags: [cars]
@@ -247,7 +280,7 @@ router.delete("/:id", authorize, deleteCarById);
 
 /**
  * @swagger
- *  /cars:
+ *  api/v1/cars:
  *    get:
  *      summary: Lists all cars
  *      tags: [cars]
@@ -300,7 +333,7 @@ router.get("/", authorize, getCars);
 
 /**
  * @swagger
- *  /cars/{id}:
+ *  api/v1/cars/{id}:
  *    get:
  *      summary: Get a car
  *      tags: [cars]

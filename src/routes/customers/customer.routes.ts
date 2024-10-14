@@ -81,10 +81,10 @@ const router = express.Router();
 
 /**
  * @swagger
- * /customers/
+ * api/v1/customers/
  *   post:
- *     summary: Cria um novo cliente
- *     description: Cria um novo cliente
+ *     summary: new client
+ *     description: create a new client
  *     tags: [Customers]
  *     requestBody:
  *       required: true
@@ -104,7 +104,7 @@ const router = express.Router();
  *                 type: string
  *     responses:
  *       201:
- *         description: Cliente criado com sucesso
+ *         description: Client created successfully
  *         content:
  *           application/json:
  *             schema:
@@ -133,9 +133,9 @@ const router = express.Router();
  *                   format: date-time
  *                   nullable: true
  *       400:
- *         description: Erro ao criar o cliente
+ *         description: Error creating customer
  *       500:
- *         description: Erro interno do servidor
+ *         description: Internal Server Error
  */
 router.post(
   "/",
@@ -146,22 +146,22 @@ router.post(
 
 /**
  * @swagger
- * /customers/{id}:
+ * api/v1/customers/{id}:
  *   get:
- *     summary: Retorna um cliente pelo ID
- *     description: Retorna um cliente pelo ID
+ *     summary: Return a customer by ID
+ *     description: Return a customer by ID
  *     tags: [Customers]
  *     parameters:
  *       - in: path
  *         name: id
- *         description: ID do cliente
+ *         description: customer ID
  *         schema:
  *           type: string
  *         required: true
  *         example: 1
  *     responses:
  *       200:
- *         description: Cliente encontrado
+ *         description: customer found
  *         content:
  *           application/json:
  *             schema:
@@ -190,20 +190,20 @@ router.post(
  *                   format: date-time
  *                   nullable: true
  *       404:
- *         description: Cliente não encontrado
+ *         description: customer not found
  */
 router.get("/:id", authorize, getCustomerById);
 
 /**
  * @swagger
- * /customers/:
+ * api/v1/customers/:
  *   get:
- *     summary: Retorna todos os clientes
- *     description: Retorna todos os clientes
+ *     summary: return all customers
+ *     description: return all customers
  *     tags: [Customers]
  *     responses:
  *       200:
- *         description: Clientes encontrados
+ *         description: customers found
  *         content:
  *           application/json:
  *             schema:
@@ -234,21 +234,21 @@ router.get("/:id", authorize, getCustomerById);
  *                     format: date-time
  *                     nullable: true
  *       500:
- *         description: Erro interno do servidor
+ *         description: Internal Server Error
  */
 router.get("/", authorize, getCustomers);
 
 /**
  * @swagger
- *  /customers/{id}:
+ *  api/v1/customers/{id}:
  *   patch:
- *     summary: Atualiza um cliente pelo ID
- *     description: Atualiza um cliente pelo ID
+ *     summary: Update a customer by ID
+ *     description: Update a customer by ID
  *     tags: [Customers]
  *     parameters:
  *       - in: path
  *         name: id
- *         description: ID do cliente
+ *         description: customer ID
  *         schema:
  *           type: string
  *         required: true
@@ -271,7 +271,7 @@ router.get("/", authorize, getCustomers);
  *                 type: string
  *     responses:
  *       200:
- *         description: Usuário atualizado com sucesso
+ *         description: User updated successfully
  *         content:
  *           application/json:
  *             schema:
@@ -300,7 +300,7 @@ router.get("/", authorize, getCustomers);
  *                   format: date-time
  *                   nullable: true
  *       404:
- *         description: Cliente não encontrado
+ *         description: customer not found
  *       500:
  *          description: Error fetching customer
  *     security:
@@ -315,22 +315,22 @@ router.patch(
 
 /**
  * @swagger
- *  /customers/{id}:
+ *  api/v1/customers/{id}:
  *   delete:
  *     summary: softe delete of a customer
- *     description: Deleta um cliente pelo ID
+ *     description: Delete a customer by id (soft delete)
  *     tags: [Customers]
  *     parameters:
  *       - in: path
  *         name: id
- *         description: ID do cliente
+ *         description: customer ID
  *         schema:
  *           type: string
  *         required: true
  *         example: 1
  *     responses:
  *       204:
- *         description: Usuário exclu do com sucesso
+ *         description: Customer deleted successfully
  *         content:
  *           application/json:
  *             schema:

@@ -21,11 +21,11 @@ const startServer = async () => {
     await sequelize.sync();
     setupAssociations();
 
-    app.use('/api/users', userRoutes);
-    app.use('/api/auth', authRoutes)
-    app.use('/api/customers', customerRoutes);
-    app.use('/api/cars', carRoutes);
-    app.use('/api/orders', orderRoutes)
+    app.use('/api/v1/users', userRoutes);
+    app.use('/api/v1/auth', authRoutes)
+    app.use('/api/v1/customers', customerRoutes);
+    app.use('/api/v1/cars', carRoutes);
+    app.use('/api/v1/orders', orderRoutes)
 
     app.use(errors());
 
