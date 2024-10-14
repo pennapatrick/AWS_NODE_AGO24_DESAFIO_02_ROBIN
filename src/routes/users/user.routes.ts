@@ -5,13 +5,18 @@ import { updateUser } from "../../controllers/users/UpdateUserController";
 import { deleteUser } from "../../controllers/users/DeleteUserController";
 import { listUsers } from "../../controllers/users/ListUserController";
 import { listOneUser } from "../../controllers/users/ListOneUserController";
+import { celebrate } from "celebrate";
+import {
+  userCreateValidationSchema,
+  userUpdateValidationSchema,
+} from "../../validations/users/UserValidations";
 
 const router = Router();
 
-router.post('/', authorize, createUser);
-router.put('/:id', authorize, updateUser);
-router.delete('/:id', authorize, deleteUser);
-router.get('/', authorize, listUsers);
-router.get('/:id', authorize, listOneUser);
+router.post("/", userCreateValidationSchema, authorize, createUser);
+router.put("/:id", userUpdateValidationSchema, authorize, updateUser);
+router.delete("/:id", authorize, deleteUser);
+router.get("/", authorize, listUsers);
+router.get("/:id", authorize, listOneUser);
 
 export default router;
