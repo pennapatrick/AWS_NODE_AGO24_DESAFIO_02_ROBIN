@@ -7,6 +7,7 @@ import carRoutes from './routes/cars/car.routes';
 import orderRoutes from './routes/orders/order.routes';
 import { errors } from 'celebrate';
 import { setupAssociations } from './db/associations';
+import { setupSwagger } from './swagger';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +21,7 @@ const startServer = async () => {
 
     await sequelize.sync();
     setupAssociations();
-
+    setupSwagger(app)
     app.use('/api/v1/users', userRoutes);
     app.use('/api/v1/auth', authRoutes);
     app.use('/api/v1/customers', customerRoutes);
