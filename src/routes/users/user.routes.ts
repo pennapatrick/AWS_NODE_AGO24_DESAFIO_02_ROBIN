@@ -96,7 +96,7 @@ const router = Router();
  *       500:
  *         description: error creating the user
  */
-router.post('/', celebrate(userCreateValidationSchema), createUser);
+router.post('/', celebrate(userCreateValidationSchema), authorize, createUser);
 
 /**
  * @swagger
