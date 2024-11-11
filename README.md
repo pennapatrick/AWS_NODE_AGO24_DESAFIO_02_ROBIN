@@ -143,39 +143,6 @@ Inicie o servidor e acesse a API
   npm run dev
 ```
 
-## Documentação do deploy na AWS
-Após a criação de uma conta na AWS seguir os seguintes passos:
-
- Verifique se sua região está em "Ohio", caso não esteja mude para Ohio.
-
- Criar uma VPC -> faça uma busca e procure por VPC, depois clique em "criar VPC", na criação marque "VPC e muito mais", escolha um nome para a VPC e clicar em "Criar VPC".
-
- Criar Security Group -> procure por EC2 e va em grupos de segurança e clique em "Criar grupo de segurança", de um nome
- ao grupo e uma descrição, utilize a VPC criada anteriormente, 
-Crie regras de entrada TCP(porta:8080, origen:Qualquer local-IPv4), 
-ssh(pota:22, origem:Qualquer Local-IPv4), RDP(porta:3389, origem: Qualquer local-IPv4) e uma regra de saída Todo o tráfego(destino:Qualquer local-IPv4)
-
- Criar instância EC2 -> em Nome e tag crie: 3 tag com chave, valor e recurso com instâcia e volumes(ex: Chave: Name, Valor: TI, Tipo de recurso: instância e volume) 
-em AMI utilize Windows Serve base 2022(o ano pode ficar a sua escolha), Tipo de instância(t2.micro), em Par de chaves (clique em criar novo par de chave e crie uma chave) 
-adicione a chave criada no campo, em Configuração de rede (clique em editar, em VPC utilize sua VPC criada anteriormente, em sub-rede adicione uma sub-rede publica, 
-em Ip publico automático coleque Habilitar), em grupo de segurança (coloque selecionar grupo e em nome do grupo adicione seu grupo criado anteriormente) 
-e em configurar armazenamento (coloque 30 GIB e gp2).
-
- Após a instância ser criada e ja estar executando -> selecione a instância criada e clique em conectar, vá em "cliente RDP" e clique em 
-"Fazer download de arquivo de área de trabalho remota", irá baixar um arquivo para acessar o máquina virtual, antes de executar o arquivo baixado clique em "Obter senha", 
-vai pedir a sua chave privada(.pem) então carregue ela e clique em "descriptografar senha", agora execute o arquivo baixado de antes
-(ele irá pedir uma senha que é a senha que foi descriptografada), depois desses procedimentos será possível utilizar a máquina.
-
- Dentro da máquina instale o banco de dados Mysql e crie um Banco com o nome "compasscar3".
-
- Instale tambem o git e o postman para testar a aplicação.
-
- Para testar a aplicação faça um clone do repositório "https://github.com/vitinhob/AWS_NODE_AGO24_DESAFIO_02_ROBIN.git" e acrescente um arquivo(.env) na raiz do projeto com os seguintes ajustes (ex: DB_NAME=compasscar3, DB_USER=root, DB_PASSWORD=7413219, DB_HOST=localhost, PORT=3000), em USER e PASSWORD serão o usuário e senha do seu banco o resto fica igual ao exemplo.
-
- Para rodar a api -> entra na pasta onde foi feito o clone do repositório do github e abara o gitbash, no terminal do git digite "npm run dev" e a aplicação irá rodar.
-
- Para a visualização do Swagger -> basta rodar a aplicação, abrir um navegador e na url colocar "http://localhost:3000/api/v1/docs" que irá mostrar a documentação.
-
 ## Autores
 
 - Camila Coradi - [@CamilaCoradi](https://github.com/CamilaCoradi)
